@@ -1,7 +1,7 @@
-import { useCallback } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { authRegisterRequest } from "../../apis/authService";
 
 const userSignUpSchema = yup.object().shape({
   email: yup.string().email("Please check your email information"),
@@ -31,9 +31,10 @@ const useSignUp = () => {
     },
   });
 
-  const handleRegisterSubmit = useCallback((data) => {
-    console.log(data);
-  }, []);
+  const handleRegisterSubmit = async (data) => {
+    const { email, password, nickname } = data;
+    await authRegisterRequest(email, password, nickname);
+  };
 
   return {
     register,
