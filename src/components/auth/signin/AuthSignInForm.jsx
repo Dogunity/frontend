@@ -11,7 +11,7 @@ const AuthSignInForm = ({ register, errors, onLoginRequestEvent }) => {
         type="email"
         name="email"
         autoFocus
-        error={errors.email ? true : false}
+        error={errors?.email?.message ? true : false}
         helperText={errors?.email?.message}
         {...register("email")}
       />
@@ -22,7 +22,7 @@ const AuthSignInForm = ({ register, errors, onLoginRequestEvent }) => {
         name="password"
         label="Password"
         type="password"
-        error={errors.password ? true : false}
+        error={errors?.password?.message ? true : false}
         helperText={errors?.password?.message}
         {...register("password")}
       />
