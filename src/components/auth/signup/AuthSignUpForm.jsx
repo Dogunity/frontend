@@ -22,7 +22,6 @@ const AuthSignUpForm = ({ register, errors, onRegisterRequestEvent }) => {
         label="Nickname"
         type="text"
         name="nickname"
-        autoFocus
         error={errors?.nickname?.message ? true : false}
         helperText={errors?.nickname?.message}
         {...register("nickname")}
