@@ -17,7 +17,11 @@ const userSignUpSchema = yup.object().shape({
 });
 
 const useSignUp = () => {
-  const { register, errors, handleSubmit } = useForm({
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
     resolver: yupResolver(userSignUpSchema),
     mode: "onChange",
     defaultValues: {
