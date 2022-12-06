@@ -9,6 +9,7 @@ const AuthContainer = ({
   register,
   errors,
   onUserLoginRequestEvent,
+  onRegisterRequestEvent,
 }) => {
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -34,7 +35,7 @@ const AuthContainer = ({
             <AuthSignUpForm
               register={register}
               errors={errors}
-              onUserLoginRequestEvent={onUserLoginRequestEvent}
+              onRegisterRequestEvent={onRegisterRequestEvent}
             />
           )}
         </Box>
