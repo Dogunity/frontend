@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
 const userSignUpSchema = yup.object().shape({
@@ -17,7 +17,7 @@ const userSignUpSchema = yup.object().shape({
 });
 
 const useSignUp = () => {
-  const { register } = useForm({
+  const { register, errors, handleSubmit } = useForm({
     resolver: yupResolver(userSignUpSchema),
     mode: "onChange",
     defaultValues: {
