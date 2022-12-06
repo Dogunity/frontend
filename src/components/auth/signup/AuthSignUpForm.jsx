@@ -11,7 +11,7 @@ const AuthSignUpForm = ({ register, errors, onRegisterRequestEvent }) => {
         type="email"
         name="email"
         autoFocus
-        error={errors.email ? true : false}
+        error={errors?.email?.message ? true : false}
         helperText={errors?.email?.message}
         {...register("email")}
       />
@@ -23,7 +23,7 @@ const AuthSignUpForm = ({ register, errors, onRegisterRequestEvent }) => {
         type="text"
         name="nickname"
         autoFocus
-        error={errors.nickname ? true : false}
+        error={errors?.nickname?.message ? true : false}
         helperText={errors?.nickname?.message}
         {...register("nickname")}
       />
@@ -34,7 +34,7 @@ const AuthSignUpForm = ({ register, errors, onRegisterRequestEvent }) => {
         name="password"
         label="Password"
         type="password"
-        error={errors.password ? true : false}
+        error={errors?.password?.message ? true : false}
         helperText={errors?.password?.message}
         {...register("password")}
       />
