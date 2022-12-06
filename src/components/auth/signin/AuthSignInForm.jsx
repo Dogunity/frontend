@@ -1,8 +1,8 @@
 import { Button, TextField, Link, Box, Grid } from "@mui/material";
 
-const AuthSignInForm = ({ register, errors, onLoginRequestEvent }) => {
+const AuthSignInForm = ({ register, errors, onUserLoginRequestEvent }) => {
   return (
-    <Box component="form" sx={{ mt: 1 }} onSubmit={onLoginRequestEvent}>
+    <Box component="form" sx={{ mt: 1 }} onSubmit={onUserLoginRequestEvent}>
       <TextField
         margin="normal"
         required
