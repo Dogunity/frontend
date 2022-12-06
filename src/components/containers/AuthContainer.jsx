@@ -2,7 +2,7 @@ import { Paper, Box, Grid } from "@mui/material";
 import AuthCommonSide from "../auth/common/AuthCommonSide";
 import AuthCommonHeader from "../auth/common/AuthCommonHeader";
 import AuthSignInForm from "../auth/signin/AuthSignInForm";
-import AuthSignUpForm from "../auth/signin/AuthSignUpForm";
+import AuthSignUpForm from "../auth/signup/AuthSignUpForm";
 
 const AuthContainer = ({
   isSignIn,
