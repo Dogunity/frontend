@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Typography, Box, Container, Stack, Button, Grid } from "@mui/material";
 import CommonContainer from "../../components/containers/CommonContainer";
 import CommunityCardContainer from "../../components/containers/CommunityCardContainer";
@@ -6,6 +7,8 @@ import CommunityCardContainer from "../../components/containers/CommunityCardCon
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const MainPage = () => {
+  const navigate = useNavigate();
+
   return (
     <CommonContainer>
       <Box sx={{ bgcolor: "background.paper", pt: 8, pb: 6 }}>
@@ -35,8 +38,12 @@ const MainPage = () => {
             spacing={2}
             justifyContent="center"
           >
-            <Button variant="contained">Explore our community</Button>
-            <Button variant="outlined">Join our community</Button>
+            <Button variant="contained" onClick={() => navigate("/community")}>
+              Explore our community
+            </Button>
+            <Button variant="outlined" onClick={() => navigate("/register")}>
+              Join our community
+            </Button>
           </Stack>
         </Container>
       </Box>
