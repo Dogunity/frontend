@@ -1,6 +1,7 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import useModal from "../common/useModal";
 import { authRegisterRequest } from "../../apis/authService";
 
 const userSignUpSchema = yup.object().shape({
@@ -31,16 +32,22 @@ const useSignUp = () => {
     },
   });
 
-  const handleRegisterSubmit = async (data) => {
-    const { email, password, nickname } = data;
-    await authRegisterRequest(email, password, nickname);
+  const { isModalOpen, handleIsModalOpenStateChange } = useModal();
+
+  const handleRegisterSubmit = async (formData) => {
+    const { email, password, nickname } = formData;
+    const { data } = await authRegisterRequest(email, password, nickname);
+    if (data.success) window.location.replace("/login");
+    else handleIsModalOpenStateChange();
   };
 
   return {
     register,
     errors,
+    isModalOpen,
     handleSubmit,
     handleRegisterSubmit,
+    handleIsModalOpenStateChange,
   };
 };
 

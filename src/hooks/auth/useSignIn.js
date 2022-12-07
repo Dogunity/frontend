@@ -1,6 +1,7 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import useSessionStorage from "../common/useSessionStorage";
 import { authLoginRequest } from "../../apis/authService";
 
 const userSignInSchema = yup.object().shape({
@@ -26,9 +27,15 @@ const useSignIn = () => {
     },
   });
 
-  const handleLoginSubmit = async (data) => {
-    const { email, password } = data;
-    await authLoginRequest(email, password);
+  const { setSessionStorageItem } = useSessionStorage();
+
+  const handleLoginSubmit = async (formData) => {
+    const { email, password } = formData;
+    const { data } = await authLoginRequest(email, password);
+    if (data.success) {
+      window.location.replace("/");
+      console.log(data);
+    }
   };
 
   return {
