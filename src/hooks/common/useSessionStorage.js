@@ -4,7 +4,7 @@ const ACCESS_TOKEN_KEY = "ACCESS_TOKEN_KEY";
 
 const useSessionStorage = () => {
   const [item, setItem] = useState(() => {
-    if (sessionStorage.getItem() !== null)
+    if (sessionStorage.getItem(ACCESS_TOKEN_KEY) !== null)
       return sessionStorage.getItem(ACCESS_TOKEN_KEY);
     return null;
   });
