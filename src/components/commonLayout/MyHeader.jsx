@@ -1,14 +1,35 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import useMyHeader from "../../hooks/header/useMyHeader";
+import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
 
 const MyHeader = () => {
+  const { menuItems, handleLogoItemButtonClick, handleMenuItemButtonClick } =
+    useMyHeader();
+
   return (
-    <AppBar position="relative">
+    <AppBar component="nav">
       <Toolbar>
-        <MenuIcon sx={{ mr: 2 }} />
-        <Typography variant="h6" color="inherit" noWrap={true}>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{
+            flexGrow: 1,
+            display: { xs: "none", sm: "block", cursor: "pointer" },
+          }}
+          onClick={handleLogoItemButtonClick}
+        >
           DOGUNITY
         </Typography>
+        <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          {menuItems.map((item) => (
+            <Button
+              key={item.title}
+              sx={{ color: "#fff" }}
+              onClick={handleMenuItemButtonClick(item.path)}
+            >
+              {item.title}
+            </Button>
+          ))}
+        </Box>
       </Toolbar>
     </AppBar>
   );
