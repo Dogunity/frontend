@@ -37,8 +37,11 @@ const useSignUp = () => {
   const handleRegisterSubmit = async (formData) => {
     const { email, password, nickname } = formData;
     const { data } = await authRegisterRequest(email, password, nickname);
-    if (data.success) window.location.replace("/login");
-    else handleIsModalOpenStateChange();
+    if (!data) {
+      handleIsModalOpenStateChange();
+      return;
+    }
+    window.location.replace("/login");
   };
 
   return {
