@@ -22,7 +22,13 @@ axiosInstance.interceptors.response.use(
     return config;
   },
   (error) => {
-    throw new Error(error);
+    const { response } = error;
+    const data = {
+      status: response.status,
+      success: false,
+      isFailed: true,
+    };
+    return data;
   }
 );
 
