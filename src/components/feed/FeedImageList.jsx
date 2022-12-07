@@ -1,5 +1,6 @@
 import { Box, ImageList, ImageListItem } from "@mui/material";
 
+// TODO: pagination
 const FeedImageList = () => {
   return (
     <Box style={{ margin: "0 auto" }}>
@@ -10,7 +11,7 @@ const FeedImageList = () => {
         gap={5}
       >
         {tempData.map((item) => (
-          <ImageListItem key={item.img}>
+          <ImageListItem key={item.img} style={{ cursor: "pointer" }}>
             <img
               src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
               srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
