@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useSessionStorage from "../common/useSessionStorage";
 
 const useMyHeader = () => {
-  const { item } = useSessionStorage();
+  const { item, clearSessionStorageItem } = useSessionStorage();
   const menuItems = useMemo(
     () => (item ? afterLoginMenuItems : beforeLoginMenuItems),
     [item]
@@ -15,7 +15,8 @@ const useMyHeader = () => {
     navigate("/");
   };
 
-  const handleMenuItemButtonClick = (path) => () => {
+  const handleMenuItemButtonClick = (title, path) => () => {
+    if (title === "Sign out") clearSessionStorageItem();
     navigate(path);
   };
 
