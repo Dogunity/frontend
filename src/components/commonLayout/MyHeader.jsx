@@ -24,7 +24,7 @@ const MyHeader = () => {
             <Button
               key={item.title}
               sx={{ color: "#fff" }}
-              onClick={handleMenuItemButtonClick(item.path)}
+              onClick={handleMenuItemButtonClick(item.title, item.path)}
             >
               {item.title}
             </Button>
