@@ -5,7 +5,7 @@ export const authLoginRequest = async (email, password) => {
     email: email,
     password: password,
   });
-  console.log(res);
+  return res;
 };
 
 export const authRegisterRequest = async (email, password, nickname) => {
@@ -14,5 +14,5 @@ export const authRegisterRequest = async (email, password, nickname) => {
     password: password,
     nickname: nickname,
   });
-  console.log(res);
+  return res;
 };
