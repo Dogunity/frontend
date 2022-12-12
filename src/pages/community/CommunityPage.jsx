@@ -1,11 +1,21 @@
+import useCommunity from "../../hooks/community/useCommunity";
 import CommonContainer from "../../components/containers/CommonContainer";
-import CommunityCardContainer from "../../components/containers/CommunityCardContainer";
+import CommunityCardList from "../../components/community/CommunityCardList";
+import PaginatorButton from "../../components/paginator/PaginatorButton";
 
 const CommunityPage = () => {
+  const { communities, totalPage, divider, curPage, setCurPage } =
+    useCommunity();
+
   return (
     <CommonContainer>
-      {/* api 연동 후 List로 교체 해야함 */}
-      <CommunityCardContainer />
+      <CommunityCardList communities={communities} />
+      <PaginatorButton
+        curPage={curPage}
+        setCurPage={setCurPage}
+        totalPage={totalPage}
+        divider={divider}
+      />
     </CommonContainer>
   );
 };
