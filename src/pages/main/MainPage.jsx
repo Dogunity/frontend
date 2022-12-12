@@ -1,13 +1,21 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typography, Box, Container, Stack, Button, Grid } from "@mui/material";
 import CommonContainer from "../../components/containers/CommonContainer";
 import CommunityCardContainer from "../../components/containers/CommunityCardContainer";
-
-// temp map
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+import { communityListRequest } from "../../apis/communityService";
 
 const MainPage = () => {
+  const [items, setItems] = useState([]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    (async () => {
+      const res = await communityListRequest(1);
+      setItems(res.result.selectedCommunities.slice(0, 3));
+    })();
+  }, []);
 
   return (
     <CommonContainer>
@@ -49,9 +57,9 @@ const MainPage = () => {
       </Box>
       <Container sx={{ py: 8 }} maxWidth="md">
         <Grid container spacing={4}>
-          {cards.map((card) => (
-            <Grid item key={card} xs={12} sm={6} md={4}>
-              <CommunityCardContainer />
+          {items.map((item) => (
+            <Grid item key={item} xs={12} sm={6} md={4}>
+              <CommunityCardContainer community={item} />
             </Grid>
           ))}
         </Grid>
