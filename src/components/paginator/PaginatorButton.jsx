@@ -12,7 +12,14 @@ const PaginatorButton = ({ curPage, setCurPage, totalPage, divider }) => {
   } = usePagination(curPage, setCurPage, totalPage, divider);
 
   return (
-    <Box style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+    <Box
+      style={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        mt: 2,
+      }}
+    >
       <Box
         style={{
           display: "flex",
@@ -22,6 +29,7 @@ const PaginatorButton = ({ curPage, setCurPage, totalPage, divider }) => {
         }}
       >
         <Button
+          sx={{ mr: 1 }}
           disabled={isFirstPage}
           variant="contained"
           onClick={handlePrevPageButtonClick}
@@ -31,6 +39,7 @@ const PaginatorButton = ({ curPage, setCurPage, totalPage, divider }) => {
         {pageList.map((page) => (
           <Button
             key={page}
+            sx={{ mr: 1 }}
             variant={curPage === page ? "contained" : "outlined"}
             onClick={handlePageButtonClick(page)}
           >
