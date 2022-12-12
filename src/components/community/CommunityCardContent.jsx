@@ -1,14 +1,12 @@
 import { CardContent, Typography } from "@mui/material";
 
-const CommunityCardContent = () => {
+const CommunityCardContent = ({ name, introduction }) => {
   return (
     <CardContent sx={{ flexGrow: 1 }}>
       <Typography gutterBottom variant="h5" component="h2">
-        Heading
+        {name}
       </Typography>
-      <Typography>
-        This is a media card. You can use this section to describe the content.
-      </Typography>
+      <Typography>{introduction}</Typography>
     </CardContent>
   );
 };
