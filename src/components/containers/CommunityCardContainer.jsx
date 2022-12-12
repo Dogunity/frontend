@@ -3,7 +3,7 @@ import CommunityCardImage from "../community/CommunityCardImage";
 import CommunityCardContent from "../community/CommunityCardContent";
 import CommunityCardFooter from "../community/CommunityCardFooter";
 
-const CommunityCardContainer = () => {
+const CommunityCardContainer = ({ community }) => {
   return (
     <Card
       sx={{
@@ -12,8 +12,11 @@ const CommunityCardContainer = () => {
         flexDirection: "column",
       }}
     >
-      <CommunityCardImage />
-      <CommunityCardContent />
+      <CommunityCardImage imageUrl={community.communityImage} />
+      <CommunityCardContent
+        name={community.name}
+        introduction={community.introduction}
+      />
       <CommunityCardFooter />
     </Card>
   );
