@@ -9,7 +9,7 @@ function a11yProps(index) {
 
 const AuthMyPageTabs = ({ tabIndex, tabItems, onTabIndexChangeEvent }) => {
   return (
-    <Box sx={{ width: "100%", mt: 10 }}>
+    <Box sx={{ width: "100%", mt: 15 }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs value={tabIndex} onChange={onTabIndexChangeEvent}>
           {tabItems.map((item, index) => (
