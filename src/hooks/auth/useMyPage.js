@@ -1,55 +1,47 @@
 import { useState, useCallback, useEffect } from "react";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import useModal from "../common/useModal";
 import useSessionStorage from "../common/useSessionStorage";
 import AuthCommunityGrid from "../../components/auth/community/AuthCommunityGrid";
-import { authMyPageCommuityRequest } from "../../apis/authService";
+import { tabItems, columns } from "../../utils/staticData";
+import {
+  authMyPageCommuityRequest,
+  authMyPageCommunityUpdateRequest,
+} from "../../apis/authService";
+
+const communityShema = yup.object().shape({
+  title: yup.string().min(2, "Please check your community title"),
+  introduction: yup.string().min(2, "Please check your community content"),
+});
 
 const useMyPage = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [communities, setCommunities] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    resolver: yupResolver(communityShema),
+    mode: "onChange",
+    defaultValues: {
+      title: "",
+      introduction: "",
+    },
+  });
 
   const { item } = useSessionStorage();
-
-  const tabItems = [
-    {
-      label: "My Communities",
-    },
-    {
-      label: "Accounts",
-    },
-  ];
-
-  const columns = [
-    { field: "id", headerName: "ID", width: 90 },
-    {
-      field: "name",
-      headerName: "Name",
-      width: 200,
-      editable: true,
-    },
-    {
-      field: "introduction",
-      headerName: "Introduction",
-      width: 300,
-      editable: true,
-    },
-    {
-      field: "createdAt",
-      headerName: "CreatedAt",
-      width: 150,
-      editable: true,
-    },
-    {
-      field: "likeCnt",
-      headerName: "Like",
-      width: 120,
-      editable: true,
-    },
-  ];
+  const { isModalOpen, handleIsModalOpenStateChange } = useModal();
 
   useEffect(() => {
     (async () => {
-      const res = await authMyPageCommuityRequest(1, item);
-      const { myCommunities } = res;
+      const myCommunities = await authMyPageCommuityRequest(item);
       if (!myCommunities.length) return;
       const data = myCommunities.map((com) => {
         return {
@@ -58,11 +50,12 @@ const useMyPage = () => {
           introduction: com.introduction,
           createdAt: com.createdAt.split("T")[0],
           likeCnt: com.likeCnt,
+          communityImage: com.communityImage,
         };
       });
       setCommunities(data);
     })();
-  }, [tabIndex]);
+  }, [isModalOpen, tabIndex]);
 
   const handleTabIndexChange = useCallback(
     (_, newValue) => {
@@ -71,10 +64,50 @@ const useMyPage = () => {
     [setTabIndex]
   );
 
+  const handleGridRowClick = useCallback(
+    (item) => {
+      setSelectedItem(item);
+      handleIsModalOpenStateChange();
+    },
+    [setSelectedItem, handleIsModalOpenStateChange]
+  );
+
+  const handleImageUploadClick = useCallback(
+    async (e) => {
+      const file = e.target.files[0];
+      setImage(file);
+      const preview = new FileReader();
+      preview.readAsDataURL(file);
+      preview.onload = () => setImagePreview(preview.result);
+    },
+    [setImage, setImagePreview]
+  );
+
+  const handleCommunityUpdateSubmit = async (formData) => {
+    const { id } = selectedItem.row;
+    const { title, introduction } = formData;
+    const res = await authMyPageCommunityUpdateRequest(
+      id,
+      title,
+      image,
+      introduction,
+      item
+    );
+    if (res.status >= 200 && res.status < 300) {
+      handleIsModalOpenStateChange();
+    }
+  };
+
   const getComponentByTabIndex = () => {
     switch (tabIndex) {
       case 0:
-        return <AuthCommunityGrid columns={columns} rows={communities} />;
+        return (
+          <AuthCommunityGrid
+            columns={columns}
+            rows={communities}
+            onGridRowClickEvent={handleGridRowClick}
+          />
+        );
 
       case 1:
         return <div>Tab 2</div>;
@@ -87,7 +120,16 @@ const useMyPage = () => {
   return {
     tabIndex,
     tabItems,
+    selectedItem,
+    isModalOpen,
+    errors,
+    imagePreview,
+    register,
+    handleSubmit,
+    handleCommunityUpdateSubmit,
     handleTabIndexChange,
+    handleIsModalOpenStateChange,
+    handleImageUploadClick,
     getComponentByTabIndex,
   };
 };
