@@ -3,7 +3,10 @@ import { Box, Grid, Button } from "@mui/material";
 import useSessionStorage from "../../hooks/common/useSessionStorage";
 import CommunityCardContainer from "../containers/CommunityCardContainer";
 
-const CommunityCardList = ({ communities }) => {
+const CommunityCardList = ({
+  communities,
+  onCommunityLikeButtonClickEvent,
+}) => {
   const { item } = useSessionStorage();
 
   const navigate = useNavigate();
@@ -30,7 +33,10 @@ const CommunityCardList = ({ communities }) => {
       <Grid container spacing={4} sx={{ mt: 2 }}>
         {communities.map((community) => (
           <Grid item key={community.id} sm={6} md={4}>
-            <CommunityCardContainer community={community} />
+            <CommunityCardContainer
+              community={community}
+              onCommunityLikeButtonClickEvent={onCommunityLikeButtonClickEvent}
+            />
           </Grid>
         ))}
       </Grid>
