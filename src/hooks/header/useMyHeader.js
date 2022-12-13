@@ -1,6 +1,10 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import useSessionStorage from "../common/useSessionStorage";
+import {
+  afterLoginMenuItems,
+  beforeLoginMenuItems,
+} from "../../utils/staticData";
 
 const useMyHeader = () => {
   const { item, clearSessionStorageItem } = useSessionStorage();
@@ -26,39 +30,5 @@ const useMyHeader = () => {
     handleMenuItemButtonClick,
   };
 };
-
-const afterLoginMenuItems = [
-  {
-    title: "Community",
-    path: "/community",
-  },
-  {
-    title: "My page",
-    path: "/mypage",
-  },
-  {
-    title: "Sign out",
-    path: "/",
-  },
-];
-
-const beforeLoginMenuItems = [
-  {
-    title: "Community",
-    path: "/community",
-  },
-  {
-    title: "My page",
-    path: "/mypage",
-  },
-  {
-    title: "Sign in",
-    path: "/login",
-  },
-  {
-    title: "Sign up",
-    path: "/register",
-  },
-];
 
 export default useMyHeader;
