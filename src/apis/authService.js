@@ -16,3 +16,13 @@ export const authRegisterRequest = async (email, password, nickname) => {
   });
   return res;
 };
+
+export const authMyPageCommuityRequest = async (curPage, token) => {
+  const res = await axiosInstance.get(`/user/community/own?page=${curPage}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const { result } = res.data;
+  return result;
+};
