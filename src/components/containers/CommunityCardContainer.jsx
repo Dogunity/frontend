@@ -65,7 +65,11 @@ const CommunityCardContainer = ({
           <Button
             variant="outlined"
             sx={{ m: 1 }}
-            onClick={() => navigate(`/feed/${selectedItem.id}`)}
+            onClick={() =>
+              navigate(`/feed/${selectedItem.id}`, {
+                state: selectedItem,
+              })
+            }
           >
             Feed
           </Button>
