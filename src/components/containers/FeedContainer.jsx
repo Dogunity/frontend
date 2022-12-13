@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import FeedHeader from "../feed/FeedHeader";
 import FeedImageList from "../feed/FeedImageList";
 
-const FeedContainer = () => {
+const FeedContainer = ({ name, introduction, communityImage }) => {
   return (
     <Box
       sx={{
@@ -13,7 +13,11 @@ const FeedContainer = () => {
         mt: 10,
       }}
     >
-      <FeedHeader />
+      <FeedHeader
+        name={name}
+        introduction={introduction}
+        communityImage={communityImage}
+      />
       <FeedImageList />
     </Box>
   );
