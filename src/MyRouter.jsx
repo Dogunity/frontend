@@ -23,7 +23,7 @@ function MyRouter() {
           <Route path="/mypage" element={<AuthMyPage />} />
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/community/post" element={<CommunityPostPage />} />
-          <Route path="/feed" element={<FeedPage />} />
+          <Route path="/feed/:id" element={<FeedPage />} />
         </Routes>
       </BrowserRouter>
     </Suspense>
