@@ -10,12 +10,18 @@ export const communityListRequest = async (page) => {
 export const communityCreateRequest = async (
   name,
   communityImage,
-  introduction
+  introduction,
+  token
 ) => {
-  const res = await axiosInstance.post("/community", {
-    name: name,
-    communityImage: communityImage,
-    introduction: introduction,
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("communityImage", communityImage);
+  formData.append("introduction", introduction);
+  const res = await axiosInstance.post("/community", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
   });
   return res;
 };
