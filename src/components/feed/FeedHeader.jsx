@@ -1,11 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import { Box, Avatar, Stack, Typography, Button } from "@mui/material";
 
-const FeedHeader = () => {
+const FeedHeader = ({ name, introduction, communityImage }) => {
+  const navigate = useNavigate();
+
   return (
     <Box sx={{ display: { xs: "none", sm: "flex" }, justifyContent: "center" }}>
       <Avatar
         alt="Community profile image"
-        src={`${process.env.PUBLIC_URL}/logo192.png`}
+        src={communityImage}
         sx={{ width: 140, height: 140 }}
       />
       <Stack
@@ -15,7 +18,7 @@ const FeedHeader = () => {
         justifyContent="center"
       >
         <Typography variant="h5" align="center" color="text.primary" paragraph>
-          Community name
+          {name}
         </Typography>
         <Typography
           variant="h6"
@@ -23,12 +26,14 @@ const FeedHeader = () => {
           color="text.secondary"
           paragraph
         >
-          Community description
+          {introduction}
         </Typography>
       </Stack>
       <Stack direction="column" spacing={2} justifyContent="center">
         <Button variant="contained">Post</Button>
-        <Button variant="outlined">Join chat room</Button>
+        <Button variant="outlined" onClick={() => navigate("/community")}>
+          Go back
+        </Button>
       </Stack>
     </Box>
   );
