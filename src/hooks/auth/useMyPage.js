@@ -11,10 +11,10 @@ const useMyPage = () => {
 
   const tabItems = [
     {
-      label: "Accounts",
+      label: "My Communities",
     },
     {
-      label: "My Communities",
+      label: "Accounts",
     },
   ];
 
