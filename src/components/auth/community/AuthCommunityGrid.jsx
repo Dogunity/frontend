@@ -1,37 +1,15 @@
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
-const AuthCommunityGrid = () => {
-  const columns = [
-    {
-      field: "name",
-      headers: "Name",
-      width: 150,
-      editable: true,
-    },
-    {
-      field: "introduction",
-      headers: "Introduction",
-      width: 150,
-      editable: true,
-    },
-    {
-      field: "createdAt",
-      headers: "CreatedAt",
-      width: 150,
-      editable: true,
-    },
-    {
-      field: "likeCnt",
-      headers: "Like",
-      width: 150,
-      editable: true,
-    },
-  ];
-
+const AuthCommunityGrid = ({ columns, rows }) => {
   return (
-    <Box sx={{ height: 400, width: "100%" }}>
-      <DataGrid pageSize={5} rowsPerPageOptions={[5]} columns={columns} />
+    <Box sx={{ width: 900, height: 400, margin: "0 auto", mt: 8 }}>
+      <DataGrid
+        pageSize={6}
+        rowsPerPageOptions={[6]}
+        columns={columns}
+        rows={rows}
+      />
     </Box>
   );
 };
