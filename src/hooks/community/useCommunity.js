@@ -6,6 +6,8 @@ import useSessionStorage from "../common/useSessionStorage";
 import {
   communityListRequest,
   communityCreateRequest,
+  communityLikeRequest,
+  communityUnLikeRequest,
 } from "../../apis/communityService";
 
 const communityShema = yup.object().shape({
@@ -62,6 +64,13 @@ const useCommunity = () => {
       window.location.replace("/community");
   };
 
+  const handleCommunityLikeButtonClick = async (_, communityId) => {
+    const data = await communityLikeRequest(communityId, item);
+    if (data.status >= 400) await communityUnLikeRequest(communityId, item);
+    const res = await communityListRequest(curPage);
+    setCommunities(res.result.selectedCommunities);
+  };
+
   return {
     communities,
     totalPage,
@@ -74,6 +83,7 @@ const useCommunity = () => {
     handleSubmit,
     handleCommunityCreateSubmit,
     handleImageUploadClick,
+    handleCommunityLikeButtonClick,
   };
 };
 
