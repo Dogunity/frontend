@@ -1,9 +1,11 @@
 import useMyPage from "../../hooks/auth/useMyPage";
 import CommonContainer from "../../components/containers/CommonContainer";
 import AuthMyPageTabs from "../../components/auth/common/AuthMyPageTabs";
+import AuthCommunityGrid from "../../components/auth/community/AuthCommunityGrid";
 
 const AuthMyPage = () => {
-  const { tabIndex, tabItems, handleTabIndexChange } = useMyPage();
+  const { tabIndex, tabItems, handleTabIndexChange, getComponentByTabIndex } =
+    useMyPage();
 
   return (
     <CommonContainer>
@@ -12,6 +14,7 @@ const AuthMyPage = () => {
         tabItems={tabItems}
         onTabIndexChangeEvent={handleTabIndexChange}
       />
+      {getComponentByTabIndex()}
     </CommonContainer>
   );
 };
