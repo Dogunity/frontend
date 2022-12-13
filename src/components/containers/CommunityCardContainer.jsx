@@ -22,7 +22,7 @@ const CommunityCardContainer = ({
       setSelectedItem(selectedCommunity);
       handleIsModalOpenStateChange();
     },
-    [setSelectedItem]
+    [setSelectedItem, handleIsModalOpenStateChange]
   );
 
   return (
