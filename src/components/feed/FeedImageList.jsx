@@ -1,7 +1,7 @@
 import { Box, ImageList, ImageListItem } from "@mui/material";
 
 // TODO: pagination
-const FeedImageList = () => {
+const FeedImageList = ({ onFeedImageButtonClickEvent }) => {
   return (
     <Box style={{ margin: "0 auto" }}>
       <ImageList
@@ -17,6 +17,7 @@ const FeedImageList = () => {
               srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
               alt={item.title}
               loading="lazy"
+              onClick={(e, item) => onFeedImageButtonClickEvent(e, item)}
             />
           </ImageListItem>
         ))}
