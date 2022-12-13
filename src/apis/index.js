@@ -23,12 +23,7 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     const { response } = error;
-    const data = {
-      status: response.status,
-      success: false,
-      isFailed: true,
-    };
-    return data;
+    return response;
   }
 );
 
