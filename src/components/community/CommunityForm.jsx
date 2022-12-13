@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -14,6 +15,8 @@ const CommunityForm = ({
   onImageUploadClickEvent,
   onCommunityCreateSubmitEvent,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <Box
       component="form"
@@ -72,7 +75,11 @@ const CommunityForm = ({
         />
       </Box>
       <Box sx={{ width: "auto" }}>
-        <Button variant="outlined" sx={{ mr: 1 }}>
+        <Button
+          variant="outlined"
+          sx={{ mr: 1 }}
+          onClick={() => navigate("/community")}
+        >
           Cancel
         </Button>
         <Button type="submit" variant="contained">
