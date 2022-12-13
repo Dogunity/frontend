@@ -55,7 +55,7 @@ const useMyPage = () => {
       });
       setCommunities(data);
     })();
-  }, [isModalOpen, tabIndex]);
+  }, [isModalOpen, tabIndex, item]);
 
   const handleTabIndexChange = useCallback(
     (_, newValue) => {
