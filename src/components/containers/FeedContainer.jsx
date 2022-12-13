@@ -2,7 +2,12 @@ import { Box } from "@mui/material";
 import FeedHeader from "../feed/FeedHeader";
 import FeedImageList from "../feed/FeedImageList";
 
-const FeedContainer = ({ name, introduction, communityImage }) => {
+const FeedContainer = ({
+  name,
+  introduction,
+  communityImage,
+  onFeedImageButtonClickEvent,
+}) => {
   return (
     <Box
       sx={{
@@ -18,7 +23,9 @@ const FeedContainer = ({ name, introduction, communityImage }) => {
         introduction={introduction}
         communityImage={communityImage}
       />
-      <FeedImageList />
+      <FeedImageList
+        onFeedImageButtonClickEvent={onFeedImageButtonClickEvent}
+      />
     </Box>
   );
 };
