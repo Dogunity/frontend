@@ -13,11 +13,12 @@ const PaginatorButton = ({ curPage, setCurPage, totalPage, divider }) => {
 
   return (
     <Box
-      style={{
+      sx={{
         width: "100%",
+        height: "auto",
         display: "flex",
         justifyContent: "center",
-        mt: 2,
+        mt: 5,
       }}
     >
       <Box
