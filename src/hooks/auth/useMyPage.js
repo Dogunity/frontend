@@ -87,8 +87,6 @@ const useMyPage = () => {
   return {
     tabIndex,
     tabItems,
-    columns,
-    communities,
     handleTabIndexChange,
     getComponentByTabIndex,
   };
