@@ -25,3 +25,29 @@ export const communityCreateRequest = async (
   });
   return res;
 };
+
+export const communityLikeRequest = async (communityId, token) => {
+  const res = await axiosInstance.post(
+    `/community/${communityId}/like`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return res;
+};
+
+export const communityUnLikeRequest = async (communityId, token) => {
+  const res = await axiosInstance.post(
+    `/community/${communityId}/nolike`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return res;
+};
