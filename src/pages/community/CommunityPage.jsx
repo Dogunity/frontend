@@ -4,12 +4,21 @@ import CommunityCardList from "../../components/community/CommunityCardList";
 import PaginatorButton from "../../components/paginator/PaginatorButton";
 
 const CommunityPage = () => {
-  const { communities, totalPage, divider, curPage, setCurPage } =
-    useCommunity();
+  const {
+    communities,
+    totalPage,
+    divider,
+    curPage,
+    setCurPage,
+    handleCommunityLikeButtonClick,
+  } = useCommunity();
 
   return (
     <CommonContainer>
-      <CommunityCardList communities={communities} />
+      <CommunityCardList
+        communities={communities}
+        onCommunityLikeButtonClickEvent={handleCommunityLikeButtonClick}
+      />
       <PaginatorButton
         curPage={curPage}
         setCurPage={setCurPage}
