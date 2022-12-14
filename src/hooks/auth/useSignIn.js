@@ -28,7 +28,8 @@ const useSignIn = () => {
     },
   });
 
-  const { setSessionStorageItem } = useSessionStorage();
+  const { setSessionStorageItem, setUserIdSessionStorageItem } =
+    useSessionStorage();
   const { isModalOpen, handleIsModalOpenStateChange } = useModal();
 
   const handleLoginSubmit = async (formData) => {
@@ -39,6 +40,7 @@ const useSignIn = () => {
       return;
     }
     const { result } = data;
+    setUserIdSessionStorageItem(result.id);
     setSessionStorageItem(result.accessToken);
     window.location.replace("/");
   };
