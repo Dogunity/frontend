@@ -38,3 +38,41 @@ export const feedPostRequest = async (
   const { data } = res;
   return data;
 };
+
+export const feedLikeRequest = async (feedId, token) => {
+  const res = await axiosInstance.post(
+    `/post/${feedId}/like`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return res;
+};
+
+export const feedUnLikeRequest = async (feedId, token) => {
+  const res = await axiosInstance.post(
+    `/post/${feedId}/nolike`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return res;
+};
+
+export const feedDeleteRequest = async (communityId, feedId, token) => {
+  const res = await axiosInstance.delete(
+    `/community/${communityId}/${feedId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return res;
+};
