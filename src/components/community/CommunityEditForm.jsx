@@ -6,6 +6,7 @@ const CommunityEditForm = ({
   errors,
   imagePreview,
   onImageUploadClickEvent,
+  onCommunityDeleteClickEvent,
   onCommunityUpdateSubmitEvent,
 }) => {
   const { name, introduction, communityImage } = selectedItem.row;
@@ -20,7 +21,6 @@ const CommunityEditForm = ({
     >
       <Box sx={{ mt: 1 }}>
         <TextField
-          label="Community Title"
           helperText="Please enter your community title"
           placeholder={name}
           name="title"
@@ -47,7 +47,6 @@ const CommunityEditForm = ({
       </Box>
       <Box sx={{ mt: 1 }}>
         <TextField
-          label="Community Introduction"
           helperText="Please enter your community introduction"
           placeholder={introduction}
           multiline
@@ -59,8 +58,15 @@ const CommunityEditForm = ({
         />
       </Box>
       <Box sx={{ width: "auto" }}>
-        <Button type="submit" variant="contained">
+        <Button type="submit" variant="outlined" sx={{ mr: 2 }}>
           Update
+        </Button>
+        <Button
+          variant="contained"
+          sx={{ mr: 2 }}
+          onClick={onCommunityDeleteClickEvent}
+        >
+          Delete
         </Button>
       </Box>
     </Box>
