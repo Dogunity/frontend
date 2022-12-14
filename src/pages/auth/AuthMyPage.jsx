@@ -15,6 +15,7 @@ const AuthMyPage = () => {
     register,
     handleSubmit,
     handleCommunityUpdateSubmit,
+    handleCommunityDeleteClick,
     handleTabIndexChange,
     handleIsModalOpenStateChange,
     handleImageUploadClick,
@@ -42,6 +43,7 @@ const AuthMyPage = () => {
           onCommunityUpdateSubmitEvent={handleSubmit(
             handleCommunityUpdateSubmit
           )}
+          onCommunityDeleteClickEvent={handleCommunityDeleteClick}
           onImageUploadClickEvent={handleImageUploadClick}
         />
       </CustomModal>
