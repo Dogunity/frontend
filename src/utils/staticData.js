@@ -37,6 +37,9 @@ export const tabItems = [
     label: "My Communities",
   },
   {
+    label: "Liked Communities",
+  },
+  {
     label: "Accounts",
   },
 ];
