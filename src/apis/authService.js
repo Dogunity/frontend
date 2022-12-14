@@ -92,3 +92,13 @@ export const authMyPageInformationUpdateRequest = async (
   });
   return res;
 };
+
+export const authMyPageFeedListRequest = async (token) => {
+  const res = await axiosInstance.get(`/user/posts`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const { result } = res.data;
+  return result;
+};
