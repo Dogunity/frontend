@@ -7,12 +7,13 @@ import useCustomForm from "../common/useCustomForm";
 import useSessionStorage from "../common/useSessionStorage";
 import AuthCommunityGrid from "../../components/auth/community/AuthCommunityGrid";
 import AuthMyInfoForm from "../../components/auth/information/AuthMyInfoForm";
-import { tabItems, columns } from "../../utils/staticData";
+import { tabItems, columns, feedColumns } from "../../utils/staticData";
 import {
   authMyPageCommuityRequest,
   authMyPageCommunityUpdateRequest,
   authMyPageCommunityDeleteRequest,
   authMyPageLikedCommunityRequest,
+  authMyPageFeedListRequest,
   authMyPageInformationRequest,
   authMyPageInformationUpdateRequest,
 } from "../../apis/authService";
@@ -75,6 +76,19 @@ const useMyPage = () => {
             createdAt: com.createdAt.split("T")[0],
             likeCnt: com.likeCnt,
             communityImage: com.communityImage,
+          };
+        });
+        setRows(data);
+      } else if (tabIndex === 2) {
+        const feedList = await authMyPageFeedListRequest(item);
+        if (!feedList.length) return;
+        const data = feedList.map((feed) => {
+          return {
+            id: feed.id,
+            userId: feed.userId,
+            description: feed.description,
+            createdAt: feed.createdAt.split("T")[0],
+            likeCnt: feed.likeCnt,
           };
         });
         setRows(data);
@@ -178,6 +192,15 @@ const useMyPage = () => {
         );
 
       case 2:
+        return (
+          <AuthCommunityGrid
+            columns={feedColumns}
+            rows={rows}
+            onGridRowClickEvent={handleGridRowClick}
+          />
+        );
+
+      case 3:
         return (
           <AuthMyInfoForm
             formValue={formValue}
