@@ -2,7 +2,12 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import useSessionStorage from "../common/useSessionStorage";
 import useModal from "../common/useModal";
-import { feedItemListRequest } from "../../apis/feedService";
+import {
+  feedItemListRequest,
+  feedDeleteRequest,
+  feedLikeRequest,
+  feedUnLikeRequest,
+} from "../../apis/feedService";
 
 const useFeed = () => {
   const [selectedFeedItem, setSelectedFeedItem] = useState(null);
@@ -32,9 +37,25 @@ const useFeed = () => {
   const handleFeedImageButtonClick = useCallback(
     (selectedItem) => () => {
       setSelectedFeedItem(selectedItem);
+      handleIsModalOpenStateChange();
     },
-    [setSelectedFeedItem]
+    [setSelectedFeedItem, handleIsModalOpenStateChange]
   );
+
+  const handleFeedDeleteButtonClick = useCallback(
+    (feed) => async () => {
+      const res = await feedDeleteRequest(feed.communityId, feed.id, item);
+      const { data } = res;
+      if (data.success) window.location.replace("/community");
+    },
+    [item]
+  );
+
+  const handleFeedLikeButtonClick = async (_, feedId) => {
+    const { data } = await feedLikeRequest(feedId, item);
+    if (data.status >= 400) await feedUnLikeRequest(feedId, item);
+    window.location.reload();
+  };
 
   return {
     id,
@@ -49,6 +70,8 @@ const useFeed = () => {
     setCurPage,
     handleFeedImageButtonClick,
     handleIsModalOpenStateChange,
+    handleFeedDeleteButtonClick,
+    handleFeedLikeButtonClick,
   };
 };
 
