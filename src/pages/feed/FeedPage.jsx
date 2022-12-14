@@ -19,6 +19,8 @@ const FeedPage = () => {
     setCurPage,
     handleFeedImageButtonClick,
     handleIsModalOpenStateChange,
+    handleFeedDeleteButtonClick,
+    handleFeedLikeButtonClick,
   } = useFeed();
 
   return (
@@ -36,7 +38,11 @@ const FeedPage = () => {
         title="Feed Detail"
         onIsModalOpenStateChangeEvent={handleIsModalOpenStateChange}
       >
-        <FeedDetail feed={selectedFeedItem} />
+        <FeedDetail
+          feed={selectedFeedItem}
+          onFeedDeleteButtonClickEvent={handleFeedDeleteButtonClick}
+          onFeedLikeButtonClickEvent={handleFeedLikeButtonClick}
+        />
       </MyCustommodal>
       <PaginatorButton
         curPage={curPage}
