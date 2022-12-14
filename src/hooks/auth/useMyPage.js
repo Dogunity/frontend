@@ -11,6 +11,7 @@ import { tabItems, columns } from "../../utils/staticData";
 import {
   authMyPageCommuityRequest,
   authMyPageCommunityUpdateRequest,
+  authMyPageCommunityDeleteRequest,
   authMyPageLikedCommunityRequest,
   authMyPageInformationRequest,
   authMyPageInformationUpdateRequest,
@@ -131,6 +132,13 @@ const useMyPage = () => {
     }
   };
 
+  const handleCommunityDeleteClick = async () => {
+    const { id } = selectedItem.row;
+    const res = await authMyPageCommunityDeleteRequest(id, item);
+    const { data } = res;
+    if (data.success) window.location.reload();
+  };
+
   const handleProfileImageUploadChange = useCallback(
     (uploadFile) => {
       setProfileImage(uploadFile);
@@ -146,7 +154,7 @@ const useMyPage = () => {
       item
     );
     const { data } = res;
-    if (data.success) window.location.replace("/");
+    if (data.success) window.location.reload();
   };
 
   const getComponentByTabIndex = () => {
@@ -194,6 +202,7 @@ const useMyPage = () => {
     register,
     handleSubmit,
     handleCommunityUpdateSubmit,
+    handleCommunityDeleteClick,
     handleTabIndexChange,
     handleIsModalOpenStateChange,
     handleImageUploadClick,
