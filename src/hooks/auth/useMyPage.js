@@ -3,12 +3,17 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import useModal from "../common/useModal";
+import useCustomForm from "../common/useCustomForm";
 import useSessionStorage from "../common/useSessionStorage";
 import AuthCommunityGrid from "../../components/auth/community/AuthCommunityGrid";
+import AuthMyInfoForm from "../../components/auth/information/AuthMyInfoForm";
 import { tabItems, columns } from "../../utils/staticData";
 import {
   authMyPageCommuityRequest,
   authMyPageCommunityUpdateRequest,
+  authMyPageLikedCommunityRequest,
+  authMyPageInformationRequest,
+  authMyPageInformationUpdateRequest,
 } from "../../apis/authService";
 
 const communityShema = yup.object().shape({
@@ -18,10 +23,11 @@ const communityShema = yup.object().shape({
 
 const useMyPage = () => {
   const [tabIndex, setTabIndex] = useState(0);
-  const [communities, setCommunities] = useState([]);
+  const [rows, setRows] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [profileImage, setProfileImage] = useState(null);
 
   const {
     register,
@@ -38,22 +44,48 @@ const useMyPage = () => {
 
   const { item } = useSessionStorage();
   const { isModalOpen, handleIsModalOpenStateChange } = useModal();
+  const { formValue, handleFormValueChange, setFormDefaultValue } =
+    useCustomForm();
 
   useEffect(() => {
     (async () => {
-      const myCommunities = await authMyPageCommuityRequest(item);
-      if (!myCommunities.length) return;
-      const data = myCommunities.map((com) => {
-        return {
-          id: com.id,
-          name: com.name,
-          introduction: com.introduction,
-          createdAt: com.createdAt.split("T")[0],
-          likeCnt: com.likeCnt,
-          communityImage: com.communityImage,
-        };
-      });
-      setCommunities(data);
+      if (tabIndex === 0) {
+        const myCommunities = await authMyPageCommuityRequest(item);
+        if (!myCommunities.length) return;
+        const data = myCommunities.map((com) => {
+          return {
+            id: com.id,
+            name: com.name,
+            introduction: com.introduction,
+            createdAt: com.createdAt.split("T")[0],
+            likeCnt: com.likeCnt,
+            communityImage: com.communityImage,
+          };
+        });
+        setRows(data);
+      } else if (tabIndex === 1) {
+        const likedCommunities = await authMyPageLikedCommunityRequest(item);
+        if (!likedCommunities.length) return;
+        const data = likedCommunities.map((com) => {
+          return {
+            id: com.id,
+            name: com.name,
+            introduction: com.introduction,
+            createdAt: com.createdAt.split("T")[0],
+            likeCnt: com.likeCnt,
+            communityImage: com.communityImage,
+          };
+        });
+        setRows(data);
+      } else {
+        const foundUser = await authMyPageInformationRequest(item);
+        const { email, profileImg, nickname } = foundUser;
+        setFormDefaultValue({
+          email: email,
+          profileImg: profileImg,
+          nickname: nickname,
+        });
+      }
     })();
   }, [isModalOpen, tabIndex, item]);
 
@@ -66,10 +98,11 @@ const useMyPage = () => {
 
   const handleGridRowClick = useCallback(
     (item) => {
+      if (tabIndex !== 0) return;
       setSelectedItem(item);
       handleIsModalOpenStateChange();
     },
-    [setSelectedItem, handleIsModalOpenStateChange]
+    [tabIndex, setSelectedItem, handleIsModalOpenStateChange]
   );
 
   const handleImageUploadClick = useCallback(
@@ -98,19 +131,53 @@ const useMyPage = () => {
     }
   };
 
+  const handleProfileImageUploadChange = useCallback(
+    (uploadFile) => {
+      setProfileImage(uploadFile);
+    },
+    [setProfileImage]
+  );
+
+  const handleProfileFormValueSubmit = async (e) => {
+    e.preventDefault();
+    const res = await authMyPageInformationUpdateRequest(
+      formValue.nickname,
+      profileImage,
+      item
+    );
+    const { data } = res;
+    if (data.success) window.location.replace("/");
+  };
+
   const getComponentByTabIndex = () => {
     switch (tabIndex) {
       case 0:
         return (
           <AuthCommunityGrid
             columns={columns}
-            rows={communities}
+            rows={rows}
             onGridRowClickEvent={handleGridRowClick}
           />
         );
 
       case 1:
-        return <div>Tab 2</div>;
+        return (
+          <AuthCommunityGrid
+            columns={columns}
+            rows={rows}
+            onGridRowClickEvent={handleGridRowClick}
+          />
+        );
+
+      case 2:
+        return (
+          <AuthMyInfoForm
+            formValue={formValue}
+            onFormValueChangeEvent={handleFormValueChange}
+            onProfileImageUploadChangeEvent={handleProfileImageUploadChange}
+            onProfileFormValueSubmitEvent={handleProfileFormValueSubmit}
+          />
+        );
 
       default:
         break;
