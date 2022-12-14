@@ -46,3 +46,40 @@ export const authMyPageCommunityUpdateRequest = async (
   });
   return res;
 };
+
+export const authMyPageLikedCommunityRequest = async (token) => {
+  const res = await axiosInstance.get(`/user/community/likes`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const { result } = res.data;
+  return result;
+};
+
+export const authMyPageInformationRequest = async (token) => {
+  const res = await axiosInstance.get(`/user/info`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const { result } = res.data;
+  return result;
+};
+
+export const authMyPageInformationUpdateRequest = async (
+  nickname,
+  profileImg,
+  token
+) => {
+  const formData = new FormData();
+  formData.append("nickname", nickname);
+  formData.append("profileImg", profileImg);
+  const res = await axiosInstance.put("/user/edit", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res;
+};
