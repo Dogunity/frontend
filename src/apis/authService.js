@@ -47,6 +47,15 @@ export const authMyPageCommunityUpdateRequest = async (
   return res;
 };
 
+export const authMyPageCommunityDeleteRequest = async (id, token) => {
+  const res = await axiosInstance.delete(`/community/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res;
+};
+
 export const authMyPageLikedCommunityRequest = async (token) => {
   const res = await axiosInstance.get(`/user/community/likes`, {
     headers: {
