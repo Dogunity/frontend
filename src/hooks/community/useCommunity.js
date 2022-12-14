@@ -47,7 +47,7 @@ const useCommunity = () => {
   }, [curPage]);
 
   const handleImageUploadClick = useCallback(
-    async (e) => {
+    (e) => {
       const file = e.target.files[0];
       setImage(file);
       const preview = new FileReader();
