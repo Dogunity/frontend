@@ -3,9 +3,11 @@ import FeedHeader from "../feed/FeedHeader";
 import FeedImageList from "../feed/FeedImageList";
 
 const FeedContainer = ({
+  id,
   name,
   introduction,
   communityImage,
+  feeds,
   onFeedImageButtonClickEvent,
 }) => {
   return (
@@ -19,11 +21,13 @@ const FeedContainer = ({
       }}
     >
       <FeedHeader
+        id={id}
         name={name}
         introduction={introduction}
         communityImage={communityImage}
       />
       <FeedImageList
+        feeds={feeds}
         onFeedImageButtonClickEvent={onFeedImageButtonClickEvent}
       />
     </Box>
