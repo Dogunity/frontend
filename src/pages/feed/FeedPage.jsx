@@ -1,6 +1,7 @@
 import useFeed from "../../hooks/feed/useFeed";
 import CommonContainer from "../../components/containers/CommonContainer";
 import FeedContainer from "../../components/containers/FeedContainer";
+import FeedDetail from "../../components/feed/FeedDetail";
 import PaginatorButton from "../../components/paginator/PaginatorButton";
 import MyCustommodal from "../../components/modal/MyCustomModal";
 
@@ -20,8 +21,6 @@ const FeedPage = () => {
     handleIsModalOpenStateChange,
   } = useFeed();
 
-  console.log(selectedFeedItem);
-
   return (
     <CommonContainer>
       <FeedContainer
@@ -34,10 +33,10 @@ const FeedPage = () => {
       />
       <MyCustommodal
         isModalOpen={isModalOpen}
-        title="Create your feed"
+        title="Feed Detail"
         onIsModalOpenStateChangeEvent={handleIsModalOpenStateChange}
       >
-        <div>아직 없음</div>
+        <FeedDetail feed={selectedFeedItem} />
       </MyCustommodal>
       <PaginatorButton
         curPage={curPage}
