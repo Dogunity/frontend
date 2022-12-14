@@ -40,6 +40,9 @@ export const tabItems = [
     label: "Liked Communities",
   },
   {
+    label: "Feeds",
+  },
+  {
     label: "Accounts",
   },
 ];
@@ -68,6 +71,34 @@ export const columns = [
     field: "likeCnt",
     headerName: "Like",
     width: 120,
+    editable: true,
+  },
+];
+
+export const feedColumns = [
+  { field: "id", headerName: "ID", width: 310 },
+  {
+    field: "createdAt",
+    headerName: "CreatedAt",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "userId",
+    headerName: "UserID",
+    width: 90,
+    editable: true,
+  },
+  {
+    field: "likeCnt",
+    headerName: "LikeCount",
+    width: 90,
+    editable: true,
+  },
+  {
+    field: "description",
+    headerName: "Description",
+    width: 320,
     editable: true,
   },
 ];
