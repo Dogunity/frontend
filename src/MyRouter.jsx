@@ -10,6 +10,7 @@ const CommunityPostPage = lazy(() =>
   import("./pages/community/CommunityPostPage")
 );
 const FeedPage = lazy(() => import("./pages/feed/FeedPage"));
+const FeedPostPage = lazy(() => import("./pages/feed/FeedPostPage"));
 const AuthMyPage = lazy(() => import("./pages/auth/AuthMyPage"));
 
 function MyRouter() {
@@ -24,6 +25,7 @@ function MyRouter() {
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/community/post" element={<CommunityPostPage />} />
           <Route path="/feed/:id" element={<FeedPage />} />
+          <Route path="/feed/post" element={<FeedPostPage />} />
         </Routes>
       </BrowserRouter>
     </Suspense>
