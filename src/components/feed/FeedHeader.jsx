@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Box, Avatar, Stack, Typography, Button } from "@mui/material";
 
-const FeedHeader = ({ name, introduction, communityImage }) => {
+const FeedHeader = ({ id, name, introduction, communityImage }) => {
   const navigate = useNavigate();
 
   return (
@@ -30,7 +30,16 @@ const FeedHeader = ({ name, introduction, communityImage }) => {
         </Typography>
       </Stack>
       <Stack direction="column" spacing={2} justifyContent="center">
-        <Button variant="contained">Post</Button>
+        <Button
+          variant="contained"
+          onClick={() =>
+            navigate("/feed/post", {
+              state: id,
+            })
+          }
+        >
+          Post
+        </Button>
         <Button variant="outlined" onClick={() => navigate("/community")}>
           Go back
         </Button>
