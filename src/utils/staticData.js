@@ -19,10 +19,6 @@ export const beforeLoginMenuItems = [
     path: "/community",
   },
   {
-    title: "My page",
-    path: "/mypage",
-  },
-  {
     title: "Sign in",
     path: "/login",
   },
