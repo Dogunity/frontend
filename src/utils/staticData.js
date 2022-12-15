@@ -98,3 +98,6 @@ export const feedColumns = [
     editable: true,
   },
 ];
+
+export const aboutOurServiceString =
+  "Community for me and my dog, Dogunity! Feel free to share your precious friends with other families. Please join our service and enjoy more :) !";
