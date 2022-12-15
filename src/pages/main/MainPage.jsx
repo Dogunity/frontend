@@ -4,6 +4,7 @@ import { Typography, Box, Container, Stack, Button, Grid } from "@mui/material";
 import CommonContainer from "../../components/containers/CommonContainer";
 import CommunityCardContainer from "../../components/containers/CommunityCardContainer";
 import { communityListRequest } from "../../apis/communityService";
+import { aboutOurServiceString } from "../../utils/staticData";
 
 const MainPage = () => {
   const [items, setItems] = useState([]);
@@ -19,7 +20,7 @@ const MainPage = () => {
 
   return (
     <CommonContainer>
-      <Box sx={{ bgcolor: "background.paper", pt: 8, pb: 6 }}>
+      <Box sx={{ bgcolor: "background.paper", pt: 12, pb: 6 }}>
         <Container maxWidth="sm">
           <Typography
             component="h1"
@@ -36,9 +37,7 @@ const MainPage = () => {
             color="text.secondary"
             paragraph
           >
-            Something short and leading about the collection below—its contents,
-            the creator, etc. Make it short and sweet, but not too short so
-            folks don&apos;t simply skip over it entirely.
+            {aboutOurServiceString}
           </Typography>
           <Stack
             sx={{ pt: 4 }}
