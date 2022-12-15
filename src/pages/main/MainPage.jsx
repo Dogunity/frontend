@@ -50,7 +50,7 @@ const MainPage = () => {
               Explore our community
             </Button>
             <Button variant="outlined" onClick={() => navigate("/register")}>
-              Join our community
+              Join our service
             </Button>
           </Stack>
         </Container>
