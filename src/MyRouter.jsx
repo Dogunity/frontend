@@ -12,6 +12,7 @@ const CommunityPostPage = lazy(() =>
 const FeedPage = lazy(() => import("./pages/feed/FeedPage"));
 const FeedPostPage = lazy(() => import("./pages/feed/FeedPostPage"));
 const AuthMyPage = lazy(() => import("./pages/auth/AuthMyPage"));
+const NotFoudPage = lazy(() => import("./pages/NotFoundPage"));
 
 function MyRouter() {
   return (
@@ -26,6 +27,7 @@ function MyRouter() {
           <Route path="/community/post" element={<CommunityPostPage />} />
           <Route path="/feed/:id" element={<FeedPage />} />
           <Route path="/feed/post" element={<FeedPostPage />} />
+          <Route path="*" element={<NotFoudPage />} />
         </Routes>
       </BrowserRouter>
     </Suspense>
